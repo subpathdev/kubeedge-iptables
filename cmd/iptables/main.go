@@ -12,7 +12,7 @@ import (
 	"k8s.io/client-go/rest"
 	"k8s.io/klog/v2"
 
-	"setIpTales/pkg/iptables"
+	"github.com/subpathdev/kubeedge-iptables/pkg/iptables"
 )
 
 var (

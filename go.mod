@@ -1,4 +1,4 @@
-module setIpTales
+module github.com/subpathdev/kubeedge-iptables
 
 go 1.17
 
