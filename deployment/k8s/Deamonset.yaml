@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubeedge-iptables
+  labels:
+    k8s-app: kubeedge
+    kubeedge: iptables-set
+spec:
+  selector:
+    matchLabels:
+      k8s-app: kubeedge
+      kubeedge: iptables-set
+  template:
+    metadata:
+      labels:
+        k8s-app: kubeedge
+        kubeedge: iptables-set
+    spec:
+      nodeSelector:
+        node-role.kubernetes.io/controlplane: "true"
+        kubernetes.io/os: linux
+      tolerations:
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/controlplane
+          value: "true"
+        - effect: NoExecute
+          key: node-role.kubernetes.io/etcd
+          value: "true"
+      containers:
+        - name: iptables-set
+          image: fobar
+          env:
+            - name: IP_KUBEEDGE_NAMESPACE
+              value: kubeedge
+            - name: IP_KUBBEDGTE_STREAMPORT
+              value: "10003"
+          securityContext:
+            privileged: true
+      serviceAccountName: kubeedge-iptables

@@ -1,0 +1,14 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: kubeedge-iptables
+  labels:
+    k8s-app: kubeedge
+    kubeedge: iptables-set
+rules:
+  - verbs:
+      - "get"
+    apiGroups:
+      - "v1"
+    resources:
+      - ConfigMap
